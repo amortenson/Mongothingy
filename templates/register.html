@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block bodycontent %}
+<div class="pure-u-2-3">
+
+<form method="GET" action="logic" class="pure-form pure-form-stacked">
+  <input type="text" name="username" placeholder="">
+  <input type="text" name="password" placeholder="">
+  <button type="submit" class="pure-button" name="logic">
+    Login
+  </button>
+</form>
+</div>
+{% endblock bodycontent %}
