@@ -2,5 +2,10 @@
 
 
 {% block bodycontent %}
-some body
+{% if {{loggedin}} %}
+Welcome, {{ username }}.
+{% endif %}
+{% else %}
+You are not logged in.
+{% endelse %}
 {% endblock bodycontent %}
