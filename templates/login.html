@@ -2,5 +2,17 @@
 
 
 {% block bodycontent %}
-some body
+<div class="pure-u-2-3">
+  
+  <form method="post" class="pure-form pure-form-stacked" action="page1">
+    <fieldset>
+      Login<br>
+      <input type="text" name="username" placeholder="Username">
+      <input type="text" name="password" placeholder="Password">
+      <button type="submit" class="pure-button" name="login">
+	Login
+      </button>
+    </fieldset>
+  </form>
+</div>
 {% endblock bodycontent %}

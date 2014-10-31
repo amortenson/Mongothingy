@@ -11,11 +11,14 @@ def home():
 
 @app.route("/login", methods=["GET","POST"])
 def login():
-    return render_template("login.html", topics = topics)
+    return render_template("login.html")
 
 @app.route("/page1", methods=["GET","POST"])
 def page1():
-    return render_template("page1.html", loggedin=loggedin, username = username)
+    if method == "GET":
+        return render_template("page1.html", loggedin=False,username="")
+    else:
+        #things
 
 @app.route("/page2", methods=["GET","POST"])
 def page2():
