@@ -2,9 +2,17 @@
 
 
 {% block bodycontent %}
-<div class="pure-u-2-3">
 
-<form method="POST" action="logic" class="pure-form pure-form-stacked">
+<div class="pure-u-2-3">
+{% if diffPass %}
+<font color="red">passwords are different pls re-enter</font>
+{% endif %}
+
+{% if notComplete %}
+<font color="red">pls fill out all the fields</font>
+{% endif %} 
+
+<form method="POST" action="register" class="pure-form pure-form-stacked">
   <input type="text" name="username" placeholder="Username">
   <input type="password" name="password" placeholder="Password">
   <input type="password" name="password2" placeholder="Retype Password">

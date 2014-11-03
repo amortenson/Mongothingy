@@ -7,7 +7,8 @@ app=Flask(__name__)
 @app.route("/", methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
 def home():
-    return render_template("main.html");
+    
+    return render_template("main.html",loggedin=False);
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -15,8 +16,22 @@ def login():
 
 @app.route("/register",methods=["GET","POST"])
 def register():
-    return render_template("register.html")
+    ud = dict(request.form.items() + request.args.items())
+    if request.method=="POST": ##already filled
+        if ud["username"]!="" and ud["password"]!="" and ud["password2"]!="":
+            if ud["password"] == ud["password2"]:
+                ##do jinja stuff
+                return render_template("register.html")
+            else:
+                return render_template("register.html",
+                                       diffPass=True)
+        else:
+            return render_template("register.html",notComplete=True)
+            
 
+    else:
+        return render_template("register.html",samePass=True)
+        
 @app.route("/page1", methods=["GET","POST"])
 def page1():
     ##universal dict. combine get and post
@@ -31,17 +46,9 @@ def page1():
 
 @app.route("/page2", methods=["GET","POST"])
 def page2():
-    return render_template("page2.html");
+    return render_template("page2.html")
 
-@app.route("/logic",methods=["GET","POST"])
-    ud = dict(request.form.items() + request.args.items())
-    if "register" in ud:
-        if ud["password"] == ud["password2"]:
-            print "passwords same"
-            #check if username already rigistered and sign up
-        else:
-            print "passwords not same"
-     
+ 
 if __name__=="__main__":
     app.debug=True
     app.run();
