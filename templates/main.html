@@ -2,9 +2,21 @@
 
 
 {% block bodycontent %}
-welcome
-<br><br><br>
-<a href="./login.html">Login</a><br>
-<a href="./register.html">Register</a>
-
+<div class="pure-menu pure-menu-open pure-menu-horizontal" align="right">
+  <!--if not logged in do this-->
+  <li>
+    <a href="./login">Login</a>
+  </li>
+  <li>
+    <a href="./register">Register</a>
+  </li>
+  <!--if logged in do this
+      <li>
+	Welcome, username!
+      </li>-->
+</div>
+<br>
+<center>
+  hi
+</center>
 {% endblock bodycontent %}
