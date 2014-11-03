@@ -3,17 +3,22 @@
 
 {% block bodycontent %}
 <div class="pure-menu pure-menu-open pure-menu-horizontal" align="right">
-  <!--if not logged in do this-->
+  <% if {{loggedin}} %>
+  <li>
+    Welcome, username!
+  </li>
+  <% endif %>
+  
+  <% else %>
   <li>
     <a href="./login">Login</a>
   </li>
   <li>
     <a href="./register">Register</a>
   </li>
-  <!--if logged in do this
-      <li>
-	Welcome, username!
-      </li>-->
+  <% endelse %>
+
+
 </div>
 <br>
 <center>

@@ -11,7 +11,7 @@ def home():
 
 @app.route("/login", methods=["GET","POST"])
 def login():
-    return render_template("login.html")
+    return render_template("login.html", loggedin = False)
 
 @app.route("/register",methods=["GET","POST"])
 def register():
@@ -33,6 +33,14 @@ def page1():
 def page2():
     return render_template("page2.html");
 
+@app.route("/logic",methods=["GET","POST"])
+    ud = dict(request.form.items() + request.args.items())
+    if "register" in ud:
+        if ud["password"] == ud["password2"]:
+            print "passwords same"
+            #check if username already rigistered and sign up
+        else:
+            print "passwords not same"
      
 if __name__=="__main__":
     app.debug=True
