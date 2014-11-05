@@ -2,6 +2,9 @@ import random
 from flask import Flask,request,redirect,render_template,session
 from pymongo import Connection
 
+conn = Connection()
+db = conn['swaggydatabase']
+
 app=Flask(__name__)
 
 @app.route("/", methods=["GET","POST"])
@@ -19,12 +22,13 @@ def register():
     ud = dict(request.form.items() + request.args.items())
     if request.method=="POST": ##already filled
         if ud["username"]!="" and ud["password"]!="" and ud["password2"]!="":
-            if ud["password"] == ud["password2"]:
-                ##do jinja stuff
-                return render_template("register.html")
+            if  False: ## username already in database
+                return render_template("register.html",userTaken=True)
+            elif ud["password"] != ud["password2"]:
+                return render_template("register.html",diffPass=True)
             else:
-                return render_template("register.html",
-                                       diffPass=True)
+                ##do jinja stuff
+                return render_template("register.html") 
         else:
             return render_template("register.html",notComplete=True)
             
