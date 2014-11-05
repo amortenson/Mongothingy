@@ -22,6 +22,29 @@
   <center>
     <div class="pure-u-22-24" id = "main">
     <br>
+      {% block menu %}
+    <div class="pure-menu pure-menu-open pure-menu-horizontal" align="right">
+      {% if loggedin %}
+      <li>
+	Welcome, {{username}}!
+      </li>
+      {% endif %}
+      
+      <li>
+	<a href="../login">Login</a>
+      </li>
+      <li>
+	<a href="../register">Register</a>
+      </li>
+      <li>
+	<a href="../page1">Page 1</a>
+      </li>
+      <li>
+	<a href="../page2">Logout</a>
+      </li>
+    </div>
+    {% endblock menu %}
+    
     {% block bodycontent %}
     placeholder body
     {% endblock bodycontent %}
