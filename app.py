@@ -3,7 +3,8 @@ from flask import Flask,request,redirect,render_template,session
 from pymongo import Connection
 
 conn = Connection()
-db = conn['swaggydatabase']
+db = conn["swaggy_database"]
+users = db["users"]
 
 app=Flask(__name__)
 
@@ -23,13 +24,20 @@ def register():
     if request.method=="POST": ##already filled
         if ud["username"]!="" and ud["password"]!="" and ud["password2"]!="":
             if  False: ## username already in database
+                ##user taken. red text
                 return render_template("register.html",userTaken=True)
             elif ud["password"] != ud["password2"]:
+                ##different passwords. red text
                 return render_template("register.html",diffPass=True)
             else:
-                ##do jinja stuff
-                return render_template("register.html") 
+                ##do db stuff
+                newUser = {"username":ud["username"],
+                           "password":ud["password"]}
+                users.insert(newUser)
+                print "lol new user"
+                return render_template("redirect.html",target="home",registered=True) 
         else:
+            ##not complete. red text.
             return render_template("register.html",notComplete=True)
             
 
