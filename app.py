@@ -8,18 +8,21 @@ users = db["users"]
 
 app=Flask(__name__)
 
+def check_login(yea,nay):
+    if "username" in session and "password" in session:
+        if db.users.find({"username": session["username"],"password":session["password"]}).count()==1:
+            yea(session["username"])
+        else:
+            nay()
+
+@check_login(home1,home2)
 @app.route("/", methods=["GET","POST"])
 @app.route("/home", methods=["GET","POST"])
-def home():
-    username = ""
-    password = ""
-    if "username" in session and "password" in session:
-        username = session["username"]
-        password = session["password"]
-        if db.users.find({"username": username,"password":password}).count()==1:
-            return render_template("main.html", loggedin=True,username=username)
-        else:
-            return render_template("main.html")
+def home(check_login):
+    def home1(args*,kwargs**):
+        return render_template("main.html", loggedin=True,username=username)
+    def home2(args*,kwargs**):
+        return render_template("main.html")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
